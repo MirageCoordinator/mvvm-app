@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="model"
+            type="ru.dellirium.mvvmapp.model.Note" />
+    </data>
+<androidx.cardview.widget.CardView
+    android:layout_margin="4dp"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent" >
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@{model.title}"
+        tools:text="Very important note"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_margin="8dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="@{model.text}"
+        tools:text="My very important note text with very important information" />
+
+</LinearLayout>
+</androidx.cardview.widget.CardView>
+</layout>
