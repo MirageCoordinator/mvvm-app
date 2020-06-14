@@ -18,8 +18,7 @@ class NotesAdapter(private var notes: List<Note>) : RecyclerView.Adapter<NotesAd
     override fun getItemCount() = notes.size
 
     override fun onBindViewHolder(vh: ViewHolder, pos: Int) {
-        val note = notes[pos]
-        vh.binding.model = note
+        vh.binding.model = notes[pos]
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -22,7 +22,9 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = viewModel
 
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
-        binding.recyclerView.adapter = viewModel.getNotesList().value?.let{
-            NotesAdapter(it) }
+        with(binding.recyclerView) {
+            adapter = viewModel.getNotesList().value?.let { NotesAdapter(it) }
+            adapter?.notifyDataSetChanged()
+        }
     }
 }
