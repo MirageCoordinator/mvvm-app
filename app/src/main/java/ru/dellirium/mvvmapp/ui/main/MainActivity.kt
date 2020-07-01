@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
             viewModel.getNotesList().observe(this@MainActivity, Observer {
                     (recyclerView.adapter as NotesAdapter).notes = it
                 })
-            }
         }
     }
 }
