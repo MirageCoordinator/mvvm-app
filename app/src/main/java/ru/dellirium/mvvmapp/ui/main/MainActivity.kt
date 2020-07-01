@@ -14,10 +14,14 @@ import ru.dellirium.mvvmapp.ui.note.NoteActivity
 
 class MainActivity : AppCompatActivity() {
 
+    private val mainViewModel by lazy {
+        ViewModelProvider(this).get(MainViewModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
         val binding: ActivityMainBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_main)
 
@@ -34,8 +38,7 @@ class MainActivity : AppCompatActivity() {
                 NoteActivity.start(this@MainActivity, null)
             }
 
-            viewModel?.let { mainViewModel1 ->
-                mainViewModel1.getNotesList().observe(this@MainActivity, Observer {
+            viewModel.getNotesList().observe(this@MainActivity, Observer {
                     (recyclerView.adapter as NotesAdapter).notes = it
                 })
             }
