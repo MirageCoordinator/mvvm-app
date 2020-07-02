@@ -18,12 +18,12 @@ class MainActivity : AppCompatActivity() {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
+    private val binding by lazy {
+        DataBindingUtil.setContentView(this, R.layout.activity_main) as ActivityMainBinding
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-        val binding: ActivityMainBinding = DataBindingUtil
-                .setContentView(this, R.layout.activity_main)
 
         with(binding) {
             lifecycleOwner = this@MainActivity
@@ -38,9 +38,11 @@ class MainActivity : AppCompatActivity() {
                 NoteActivity.start(this@MainActivity, null)
             }
 
-            viewModel.getNotesList().observe(this@MainActivity, Observer {
+            viewModel?.run {
+                getNotesList().observe(this@MainActivity, Observer {
                     (recyclerView.adapter as NotesAdapter).notes = it
                 })
+            }
         }
     }
 }
