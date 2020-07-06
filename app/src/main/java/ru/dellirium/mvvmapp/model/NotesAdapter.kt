@@ -4,10 +4,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import ru.dellirium.mvvmapp.databinding.ItemNoteBinding
 
-class NotesAdapter(private var notes: List<Note>) : RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
+class NotesAdapter(val onItemClick: ((Note) -> Unit)? = null) : RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
+
+    var notes: List<Note> = listOf()
+    set(value) {
+        field = value
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -18,12 +25,18 @@ class NotesAdapter(private var notes: List<Note>) : RecyclerView.Adapter<NotesAd
     override fun getItemCount() = notes.size
 
     override fun onBindViewHolder(vh: ViewHolder, pos: Int) {
-        val note = notes[pos]
-        vh.binding.model = note
+        vh.binding.model = notes[pos]
+        vh.setListener(notes[pos])
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var binding: ItemNoteBinding = DataBindingUtil.bind(itemView)!!
+
+        fun setListener(note: Note) {
+            itemView.setOnClickListener {
+                onItemClick?.invoke(note)
+            }
+        }
     }
 
 }
