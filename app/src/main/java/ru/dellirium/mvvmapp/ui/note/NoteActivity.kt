@@ -8,10 +8,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ru.dellirium.mvvmapp.R
+import ru.dellirium.mvvmapp.databinding.ActivityMainBinding
 import ru.dellirium.mvvmapp.databinding.ActivityNoteBinding
 import ru.dellirium.mvvmapp.model.Note
+import ru.dellirium.mvvmapp.ui.base.BaseActivity
+import ru.dellirium.mvvmapp.ui.base.BaseViewModel
 
-class NoteActivity : AppCompatActivity() {
+class NoteActivity : BaseActivity<Note?, NoteViewState>() {
 
     companion object {
         private val EXTRA_NOTE = NoteActivity::class.java.name + "extra.NOTE"
@@ -23,22 +26,27 @@ class NoteActivity : AppCompatActivity() {
             }
             context.startActivity(this)
         }
+    }
 
+    private var note: Note? = null
+    override val viewModel: BaseViewModel<Note?, NoteViewState> by lazy {
+        ViewModelProvider(this).get(NoteViewModel::class.java)
+    }
+
+    override val binding by lazy {
+        DataBindingUtil.setContentView(this, R.layout.activity_note) as ActivityNoteBinding
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
-        val binding: ActivityNoteBinding = DataBindingUtil
-                .setContentView(this, R.layout.activity_note)
-
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
-
+        binding.viewModel = viewModel as NoteViewModel?
         binding.viewModel?.run {
             setNote(intent.getParcelableExtra(EXTRA_NOTE))
         }
+    }
 
+    override fun renderData(data: Note?) {
+        this.note = data
     }
 }

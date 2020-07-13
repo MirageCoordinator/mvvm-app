@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="viewModel"
+            name="vm"
             type="ru.dellirium.mvvmapp.ui.main.MainViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +30,8 @@
             android:clickable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@mipmap/ic_add_24" />
+            app:srcCompat="@mipmap/ic_add_24"
+            android:focusable="true" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

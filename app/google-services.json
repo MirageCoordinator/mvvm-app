@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "239820097347",
+    "firebase_url": "https://mvvm-app-a2ab2.firebaseio.com",
+    "project_id": "mvvm-app-a2ab2",
+    "storage_bucket": "mvvm-app-a2ab2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239820097347:android:b767ec0689152f30c791f6",
+        "android_client_info": {
+          "package_name": "ru.dellirium.mvvmapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "239820097347-jvu0osf5l9a3fu732334i1r8f6ibljs0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.dellirium.mvvmapp",
+            "certificate_hash": "123eacaa66b0e657bb59e134414674fd3027f169"
+          }
+        },
+        {
+          "client_id": "239820097347-8vaas21bnsoapkq17s01ht24mm42mr64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOZeLPq_-9HNRpt5S-WbuTfHVC9fzmqMU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "239820097347-8vaas21bnsoapkq17s01ht24mm42mr64.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

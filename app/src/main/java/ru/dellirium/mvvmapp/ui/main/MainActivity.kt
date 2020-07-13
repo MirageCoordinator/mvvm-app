@@ -9,16 +9,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import ru.dellirium.mvvmapp.R
 import ru.dellirium.mvvmapp.databinding.ActivityMainBinding
+import ru.dellirium.mvvmapp.model.Note
 import ru.dellirium.mvvmapp.model.NotesAdapter
+import ru.dellirium.mvvmapp.ui.base.BaseActivity
+import ru.dellirium.mvvmapp.ui.base.BaseViewModel
 import ru.dellirium.mvvmapp.ui.note.NoteActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<List<Note>?, MainViewState>() {
 
-    private val mainViewModel by lazy {
+    override val viewModel: BaseViewModel<List<Note>?, MainViewState> by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
-    private val binding by lazy {
+    override val binding by lazy {
         DataBindingUtil.setContentView(this, R.layout.activity_main) as ActivityMainBinding
     }
 
@@ -26,8 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         with(binding) {
-            lifecycleOwner = this@MainActivity
-            viewModel = mainViewModel
+            vm = viewModel as MainViewModel?
 
             recyclerView.layoutManager = GridLayoutManager(this@MainActivity, 2)
             recyclerView.adapter = NotesAdapter {
@@ -37,12 +39,12 @@ class MainActivity : AppCompatActivity() {
             fab.setOnClickListener {
                 NoteActivity.start(this@MainActivity, null)
             }
+        }
+    }
 
-            viewModel?.run {
-                getNotesList().observe(this@MainActivity, Observer {
-                    (recyclerView.adapter as NotesAdapter).notes = it
-                })
-            }
+    override fun renderData(data: List<Note>?) {
+        data?.let {
+            (binding.recyclerView.adapter as NotesAdapter).notes = it
         }
     }
 }
