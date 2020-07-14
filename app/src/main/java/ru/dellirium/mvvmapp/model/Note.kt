@@ -1,18 +1,14 @@
 package ru.dellirium.mvvmapp.model
 
-import android.os.Parcelable
 import androidx.annotation.IntDef
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import kotlinx.android.parcel.IgnoredOnParcel
-import kotlinx.android.parcel.Parcelize
 import ru.dellirium.mvvmapp.BR
 
-@Parcelize
-data class Note(val id: String,
-                var _title: String,
-                var _text: String,
-                @NoteColor val color: Int = WHITE) : BaseObservable(), Parcelable {
+class Note(val id: String = "",
+                title: String = "",
+                text: String = "",
+                @NoteColor val color: Int = WHITE) : BaseObservable() {
 
     companion object {
         const val WHITE = android.R.color.white
@@ -22,21 +18,17 @@ data class Note(val id: String,
         const val VIOLET = android.R.color.holo_purple
     }
 
-    @IgnoredOnParcel
-    @get:Bindable
-    var title
-    get() = _title
+    @Bindable
+    var title: String = title
     set(value) {
-        _title = value
+        field = value
         notifyPropertyChanged(BR.title)
     }
 
-    @IgnoredOnParcel
-    @get:Bindable
-    var text
-        get() = _text
+    @Bindable
+    var text: String = text
         set(value) {
-            _text = value
+            field = value
             notifyPropertyChanged(BR.text)
         }
 
@@ -52,5 +44,13 @@ data class Note(val id: String,
 
         if (id != other.id) return false
         return true
+    }
+
+    override fun hashCode(): Int {
+        var result = id.hashCode()
+        result = 31 * result + color
+        result = 31 * result + title.hashCode()
+        result = 31 * result + text.hashCode()
+        return result
     }
 }

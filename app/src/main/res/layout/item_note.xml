@@ -22,7 +22,7 @@
         android:id="@+id/tv_title"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@{model._title}"
+        android:text="@{model.title}"
         tools:text="Very important note"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -33,7 +33,7 @@
         android:layout_margin="8dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="@{model._text}"
+        android:text="@{model.text}"
         tools:text="My very important note text with very important information" />
 
 </LinearLayout>

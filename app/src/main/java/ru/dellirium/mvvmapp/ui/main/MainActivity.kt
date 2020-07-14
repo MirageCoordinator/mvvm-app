@@ -33,7 +33,7 @@ class MainActivity : BaseActivity<List<Note>?, MainViewState>() {
 
             recyclerView.layoutManager = GridLayoutManager(this@MainActivity, 2)
             recyclerView.adapter = NotesAdapter {
-                NoteActivity.start(this@MainActivity, it)
+                NoteActivity.start(this@MainActivity, it.id)
             }
 
             fab.setOnClickListener {
