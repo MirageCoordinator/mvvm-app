@@ -1,4 +1,4 @@
-package ru.dellirium.mvvmapp.model
+package ru.dellirium.mvvmapp.data.model
 
 import androidx.annotation.IntDef
 import androidx.databinding.BaseObservable

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="model"
-            type="ru.dellirium.mvvmapp.model.Note" />
+            type="ru.dellirium.mvvmapp.data.model.Note" />
     </data>
 <androidx.cardview.widget.CardView
     android:layout_margin="4dp"

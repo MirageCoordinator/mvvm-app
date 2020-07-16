@@ -1,6 +1,6 @@
 package ru.dellirium.mvvmapp.ui.main
 
-import ru.dellirium.mvvmapp.model.Note
+import ru.dellirium.mvvmapp.data.model.Note
 import ru.dellirium.mvvmapp.ui.base.BaseViewState
 
 class MainViewState (

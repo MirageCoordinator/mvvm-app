@@ -1,8 +1,8 @@
 package ru.dellirium.mvvmapp.ui.note
 
-import ru.dellirium.mvvmapp.model.Note
-import ru.dellirium.mvvmapp.model.NoteResult
-import ru.dellirium.mvvmapp.model.NotesRepository
+import ru.dellirium.mvvmapp.data.model.Note
+import ru.dellirium.mvvmapp.data.model.NoteResult
+import ru.dellirium.mvvmapp.data.model.NotesRepository
 import ru.dellirium.mvvmapp.ui.base.PropertyAwareMutableLiveData
 import ru.dellirium.mvvmapp.ui.base.BaseViewModel
 
@@ -12,7 +12,7 @@ class NoteViewModel : BaseViewModel<Note?, NoteViewState>() {
     }
 
     fun loadNote(noteId: String) {
-        NotesRepository.getNoteById(noteId).observeForever {result ->
+        NotesRepository.getNoteById(noteId).observeForever { result ->
             result ?: return@observeForever
             when(result){
                 is NoteResult.Success<*> -> {

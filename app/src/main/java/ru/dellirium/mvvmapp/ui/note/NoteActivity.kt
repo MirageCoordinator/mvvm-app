@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import ru.dellirium.mvvmapp.R
 import ru.dellirium.mvvmapp.databinding.ActivityNoteBinding
-import ru.dellirium.mvvmapp.model.Note
+import ru.dellirium.mvvmapp.data.model.Note
 import ru.dellirium.mvvmapp.ui.base.BaseActivity
 import ru.dellirium.mvvmapp.ui.base.BaseViewModel
 import java.util.*

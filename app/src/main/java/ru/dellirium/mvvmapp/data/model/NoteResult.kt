@@ -1,4 +1,4 @@
-package ru.dellirium.mvvmapp.model
+package ru.dellirium.mvvmapp.data.model
 
 sealed class NoteResult  {
     data class Success<out T>(val data: T) : NoteResult()

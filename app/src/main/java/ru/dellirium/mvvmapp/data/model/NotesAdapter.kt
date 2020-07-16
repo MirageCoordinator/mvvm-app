@@ -1,4 +1,4 @@
-package ru.dellirium.mvvmapp.model
+package ru.dellirium.mvvmapp.data.model
 
 import android.view.LayoutInflater
 import android.view.View
