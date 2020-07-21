@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@{context.getResources().getColor(viewModel.note.color)}">
+        app:note_background="@{viewModel.note.color}">
 
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
@@ -52,6 +52,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_text_title" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

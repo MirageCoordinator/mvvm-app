@@ -32,7 +32,18 @@ class NoteViewModel : BaseViewModel<NoteViewState.Data, NoteViewState>() {
 
     fun deleteNote() {
         note.value?.let {
-            NotesRepository.deleteNoteById(it.id)
+            NotesRepository.deleteNoteById(it.id).observeForever { result ->
+                result ?: return@observeForever
+                when (result) {
+                    is NoteResult.Success<*> -> {
+                        viewStateLiveData.value = NoteViewState(NoteViewState.Data(isDeleted = true))
+                        note.value = viewStateLiveData.value?.run { data.note }
+                    }
+                    is NoteResult.Error -> {
+                        viewStateLiveData.value = NoteViewState(error = result.error)
+                    }
+                }
+            }
         }
     }
 

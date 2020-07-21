@@ -49,15 +49,15 @@ class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
         } ?: let {
             viewModel.note.value = Note(id = UUID.randomUUID().toString())
         }
+
+        colorPicker.onColorClickListener = {
+            viewModel.changeColor(it)
+        }
     }
 
     override fun renderData(data: NoteViewState.Data) {
         if (data.isDeleted) finish()
         this.note = data.note
-
-        colorPicker.onColorClickListener = {
-            viewModel.changeColor(it)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean = menuInflater.inflate(R.menu.note, menu)
@@ -79,6 +79,7 @@ class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
                 .setNegativeButton("No") { dialog, _ ->
                     dialog.dismiss()
                 }
+                .show()
     }
 
     private fun togglePalette() {
