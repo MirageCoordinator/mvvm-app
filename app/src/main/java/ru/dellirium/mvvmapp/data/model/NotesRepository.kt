@@ -1,13 +1,14 @@
 package ru.dellirium.mvvmapp.data.model
 
 import ru.dellirium.mvvmapp.data.provider.FirestoreDataProvider
-import ru.dellirium.mvvmapp.data.provider.RemoteDataProvider
+import ru.dellirium.mvvmapp.data.provider.DataProvider
 
 object NotesRepository {
-    private val remoteProvider: RemoteDataProvider = FirestoreDataProvider()
+    private val PROVIDER: DataProvider = FirestoreDataProvider()
 
-    fun getNotes() = remoteProvider.subscribeToAllNotes()
-    fun saveNote(note: Note) = remoteProvider.saveNote(note)
-    fun getNoteById(id: String) = remoteProvider.getNoteById(id)
-    fun getCurrentUser() = remoteProvider.getCurrentUser()
+    fun getNotes() = PROVIDER.subscribeToAllNotes()
+    fun saveNote(note: Note) = PROVIDER.saveNote(note)
+    fun getNoteById(id: String) = PROVIDER.getNoteById(id)
+    fun deleteNoteById(id: String) = PROVIDER.deleteNote(id)
+    fun getCurrentUser() = PROVIDER.getCurrentUser()
 }

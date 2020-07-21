@@ -1,20 +1,21 @@
 package ru.dellirium.mvvmapp.ui.note
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.activity_note.*
 import ru.dellirium.mvvmapp.R
-import ru.dellirium.mvvmapp.databinding.ActivityNoteBinding
 import ru.dellirium.mvvmapp.data.model.Note
+import ru.dellirium.mvvmapp.databinding.ActivityNoteBinding
 import ru.dellirium.mvvmapp.ui.base.BaseActivity
-import ru.dellirium.mvvmapp.ui.base.BaseViewModel
 import java.util.*
 
-class NoteActivity : BaseActivity<Note?, NoteViewState>() {
+class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
 
     companion object {
         private val EXTRA_NOTE = NoteActivity::class.java.name + "extra.NOTE"
@@ -50,7 +51,49 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
         }
     }
 
-    override fun renderData(data: Note?) {
-        this.note = data
+    override fun renderData(data: NoteViewState.Data) {
+        if (data.isDeleted) finish()
+        this.note = data.note
+
+        colorPicker.onColorClickListener = {
+            viewModel.changeColor(it)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean = menuInflater.inflate(R.menu.note, menu)
+            .let { true }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        android.R.id.home -> onBackPressed().let { true }
+        R.id.palette -> togglePalette().let { true }
+        R.id.delete -> deleteNote().let { true }
+        else -> super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteNote() {
+        AlertDialog.Builder(this)
+                .setMessage("Are you sure?")
+                .setPositiveButton("Yes") { _, _ ->
+                    viewModel.deleteNote()
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss()
+                }
+    }
+
+    private fun togglePalette() {
+        if(binding.colorPicker.isOpen) {
+            binding.colorPicker.close()
+        } else {
+            binding.colorPicker.open()
+        }
+    }
+
+    override fun onBackPressed() {
+        if (binding.colorPicker.isOpen) {
+            binding.colorPicker.close()
+            return
+        }
+        super.onBackPressed()
     }
 }

@@ -9,7 +9,7 @@ import ru.dellirium.mvvmapp.data.model.Note
 import ru.dellirium.mvvmapp.data.model.NoteResult
 import ru.dellirium.mvvmapp.data.model.User
 
-class FirestoreDataProvider : RemoteDataProvider {
+class FirestoreDataProvider : DataProvider {
 
     companion object {
         private const val NOTES_COLLECTION = "notes"
@@ -62,6 +62,16 @@ class FirestoreDataProvider : RemoteDataProvider {
             .addOnFailureListener {
                 value = NoteResult.Error(it)
             }
+    }
+
+    override fun deleteNote(noteId: String): LiveData<NoteResult> = MutableLiveData<NoteResult>().apply {
+        userNotesCollection.document(noteId).delete()
+                .addOnSuccessListener {
+                    value = NoteResult.Success(null)
+                }
+                .addOnFailureListener {
+                    value = NoteResult.Error(it)
+                }
     }
 
     override fun getCurrentUser(): LiveData<User?> = MutableLiveData<User?>().apply {

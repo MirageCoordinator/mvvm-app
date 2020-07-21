@@ -8,14 +8,24 @@ import ru.dellirium.mvvmapp.BR
 class Note(val id: String = "",
                 title: String = "",
                 text: String = "",
-                @NoteColor val color: Int = WHITE) : BaseObservable() {
+                @NoteColor color: Int = WHITE) : BaseObservable() {
 
     companion object {
         const val WHITE = android.R.color.white
-        const val YELLOW = android.R.color.holo_green_light
+        const val YELLOW = android.R.color.holo_orange_light
+        const val GREEN = android.R.color.holo_green_light
         const val BLUE = android.R.color.holo_blue_light
         const val RED = android.R.color.holo_red_light
         const val VIOLET = android.R.color.holo_purple
+
+        val listOfColors = listOf(WHITE, YELLOW, GREEN, BLUE, RED, VIOLET)
+    }
+
+    @Bindable
+    @NoteColor var color: Int = color
+    set(value) {
+        field = value
+        notifyPropertyChanged(BR.color)
     }
 
     @Bindable
@@ -32,7 +42,7 @@ class Note(val id: String = "",
             notifyPropertyChanged(BR.text)
         }
 
-    @IntDef(WHITE, YELLOW, BLUE, RED, VIOLET)
+    @IntDef(WHITE, YELLOW, GREEN, BLUE, RED, VIOLET)
     @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
     annotation class NoteColor
 
