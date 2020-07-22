@@ -1,14 +1,11 @@
 package ru.dellirium.mvvmapp.ui.splash
 
-import androidx.lifecycle.ViewModelProvider
+import org.koin.android.viewmodel.ext.android.viewModel
 import ru.dellirium.mvvmapp.ui.base.BaseActivity
-import ru.dellirium.mvvmapp.ui.base.BaseViewModel
 import ru.dellirium.mvvmapp.ui.main.MainActivity
 
 class SplashActivity : BaseActivity<Boolean?, SplashViewState>() {
-    override val viewModel: SplashViewModel by lazy {
-        ViewModelProvider(this).get(SplashViewModel::class.java)
-    }
+    override val viewModel: SplashViewModel by viewModel()
     override val binding = null
 
     override fun onResume() {

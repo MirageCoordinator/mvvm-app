@@ -60,6 +60,10 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.2.4"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    implementation "org.koin:koin-android:2.1.6"
+    implementation "org.koin:koin-android-scope:2.1.6"
+    implementation "org.koin:koin-android-viewmodel:2.1.6"
+
 }
 repositories {
     mavenCentral()

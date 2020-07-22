@@ -4,15 +4,13 @@ import ru.dellirium.mvvmapp.data.errors.NoAuthException
 import ru.dellirium.mvvmapp.data.model.NotesRepository
 import ru.dellirium.mvvmapp.ui.base.BaseViewModel
 
-class SplashViewModel : BaseViewModel<Boolean?, SplashViewState>() {
+class SplashViewModel(val notesRepository: NotesRepository) : BaseViewModel<Boolean?, SplashViewState>() {
 
     fun requestUser() {
-        NotesRepository.getCurrentUser().observeForever() {
+        notesRepository.getCurrentUser().observeForever() {
             viewStateLiveData.value = it?.let {
                 SplashViewState(authenticated = true)
-            } ?: let {
-                SplashViewState(error = NoAuthException())
-            }
+            } ?: SplashViewState(error = NoAuthException())
         }
     }
 }

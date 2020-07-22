@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_note.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import ru.dellirium.mvvmapp.R
 import ru.dellirium.mvvmapp.data.model.Note
 import ru.dellirium.mvvmapp.databinding.ActivityNoteBinding
@@ -30,9 +30,7 @@ class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
     }
 
     private var note: Note? = null
-    override val viewModel: NoteViewModel by lazy {
-        ViewModelProvider(this).get(NoteViewModel::class.java)
-    }
+    override val viewModel: NoteViewModel by viewModel()
 
     override val binding by lazy {
         DataBindingUtil.setContentView(this, R.layout.activity_note) as ActivityNoteBinding

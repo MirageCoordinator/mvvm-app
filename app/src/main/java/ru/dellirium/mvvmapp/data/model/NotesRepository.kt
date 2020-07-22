@@ -1,14 +1,12 @@
 package ru.dellirium.mvvmapp.data.model
 
-import ru.dellirium.mvvmapp.data.provider.FirestoreDataProvider
 import ru.dellirium.mvvmapp.data.provider.DataProvider
 
-object NotesRepository {
-    private val PROVIDER: DataProvider = FirestoreDataProvider()
+class NotesRepository(val provider: DataProvider) {
 
-    fun getNotes() = PROVIDER.subscribeToAllNotes()
-    fun saveNote(note: Note) = PROVIDER.saveNote(note)
-    fun getNoteById(id: String) = PROVIDER.getNoteById(id)
-    fun deleteNoteById(id: String) = PROVIDER.deleteNote(id)
-    fun getCurrentUser() = PROVIDER.getCurrentUser()
+    fun getNotes() = provider.subscribeToAllNotes()
+    fun saveNote(note: Note) = provider.saveNote(note)
+    fun getNoteById(id: String) = provider.getNoteById(id)
+    fun deleteNoteById(id: String) = provider.deleteNote(id)
+    fun getCurrentUser() = provider.getCurrentUser()
 }

@@ -9,16 +9,13 @@ import ru.dellirium.mvvmapp.data.model.Note
 import ru.dellirium.mvvmapp.data.model.NoteResult
 import ru.dellirium.mvvmapp.data.model.User
 
-class FirestoreDataProvider : DataProvider {
+class FirestoreDataProvider(private val store: FirebaseFirestore, private val auth: FirebaseAuth) : DataProvider {
 
     companion object {
         private const val NOTES_COLLECTION = "notes"
         private const val USER_COLLECTION = "users"
 
     }
-
-    private val store by lazy { FirebaseFirestore.getInstance() }
-    private val auth by lazy { FirebaseAuth.getInstance() }
 
     private val currentUser
         get() = auth.currentUser
